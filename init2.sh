@@ -1,17 +1,17 @@
 #start zookeeper
-./kafka_2.12-1.1.0/bin/zookeeper-server-start.sh ./config/zookeeper.properties
+./kafka_2.12-1.1.0/bin/zookeeper-server-start.sh -daemon ./kafka_2.12-1.1.0/config/zookeeper.properties
 
 # start broker
-./kafka_2.12-1.1.0/bin/kafka-server-start.sh ./config/server.properties 
+./kafka_2.12-1.1.0/bin/kafka-server-start.sh -daemon ./kafka_2.12-1.1.0/config/server.properties 
 
 # create topic “test”
 ./kafka_2.12-1.1.0/bin/kafka-topics.sh --create --topic weather --zookeeper localhost:2181 --partitions 1 --replication-factor 1
 
 # consume from the topic using the console producer
-./kafka_2.12-1.1.0/bin/kafka-console-consumer.sh --topic weather --zookeeper localhost:2181
+./kafka_2.12-1.1.0/bin/kafka-console-consumer.sh -daemon --topic weather --zookeeper localhost:2181
 
 # produce something into the topic (write something and hit enter)
-./kafka_2.12-1.1.0/bin/kafka-console-producer.sh --topic weather --broker-list localhost:9092
+./kafka_2.12-1.1.0/bin/kafka-console-producer.sh -daemon --topic weather --broker-list localhost:9092
 
 
 echo "name=elasticsearch-sink
